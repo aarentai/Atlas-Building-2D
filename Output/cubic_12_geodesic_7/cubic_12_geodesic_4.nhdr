@@ -1,7 +1,7 @@
 NRRD0004
 # Complete NRRD file format specification at:
 # http://teem.sourceforge.net/nrrd/format.html
-type: double
+type: float
 dimension: 3
 space: left-posterior-superior
 sizes: 3 100 100
