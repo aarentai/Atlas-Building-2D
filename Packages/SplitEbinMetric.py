@@ -18,13 +18,14 @@ def trKsquare(B, A):
 def Squared_distance_Ebin(g0, g1, a, mask):
 #     inputs: g0.shape, g1.shape = [h, w, 2, 2]
 #     output: scalar
+#     3.3.4 https://www.cs.utah.edu/~haocheng/notes/NoteonMatching.pdf
     inv_g0_g1 = torch.einsum("...ik,...kj->...ij", torch.inverse(g0), g1)
-    trK0square = trKsquare(g0, g1) - torch.log(torch.det(inv_g0_g1)) ** 2 / 2  # torch.log(torch.det(inv_g0_g1) + 1e-25)
+    trK0square = trKsquare(g0, g1) - torch.log(torch.det(inv_g0_g1)) ** 2 * a  # torch.log(torch.det(inv_g0_g1) + 1e-25)
     theta = torch.min((trK0square / a + 1e-25).sqrt() / 4, torch.tensor(np.pi, dtype=torch.double))  
     alpha, beta = torch.det(g0).pow(1 / 4), torch.det(g1).pow(1 / 4)
     E = 16 * a * (alpha ** 2 - 2 * alpha * beta * torch.cos(theta) + beta ** 2)
 #     print(E.shape)
-    return torch.einsum("ij,ij->", E, mask.squeeze())
+    return torch.einsum("ij,ij->", E, mask)
 
 
 def logm_invB_A(B, A):
