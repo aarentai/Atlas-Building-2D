@@ -52,3 +52,13 @@ psi_inv_acc = compose_function(phi_inv, psi_inv_acc)
 cholesky_cpu: For batch 0: U(1,1) is zero, singular U.
 ```
 - `a` in `Squared_distance_Ebin(g0, g1, a, mask)`, `get_karcher_mean(G, a)`, `get_geo(g0, g1, a, Tpts)`, `inv_RieExp_extended(g0, g1, a)`, `Rie_Exp_extended(g0, u, a)`, `Rie_Exp(g0, u, a)`, `inv_RieExp(g0, g1, a)` equals to the reciprocal of dimension, `1/dim`, namely the last entry of tensor field's shape.
+
+## Citation
+```
+@misc{2103.05730,
+Author = {Kristen M. Campbell and Haocheng Dai and Zhe Su and Martin Bauer and P. Thomas Fletcher and Sarang C. Joshi},
+Title = {Structural Connectome Atlas Construction in the Space of Riemannian Metrics},
+Year = {2021},
+Eprint = {arXiv:2103.05730},
+}
+```
