@@ -16,7 +16,7 @@ output_mask = sitk.WriteImage(sitk.GetImageFromArray(np.transpose(output_tensor,
 Shape of output_tensor.nhdr is `[w, h, 2]`, and Shape of output_mask.nhdr is `[w, h]`
 
 ### Note
-`sitk.WriteImage(sitk.GetImageFromArray())` and `sitk.GetArrayFromImage(sitk.ReadImage(path))` is a pair of inverse operation, and you can see there is no inconsistence with regards to the dimension issue.
+`sitk.WriteImage(sitk.GetImageFromArray())` and `sitk.GetArrayFromImage(sitk.ReadImage(path))` is a pair of inverse operation.
 ```
 output_tensor = np.zeros((12,34,56,78))
 sitk.WriteImage(sitk.GetImageFromArray(output_tensor), path)
@@ -36,11 +36,11 @@ Make sure you follow the conventions below to make the algorithm consistent.
 
 To avoid the `x` and `y` ambiguity in indexing and ploting, naming the first two dimension in `[h, w, 2, 2]` in the order of `x`, `y` is the best choice! 
 - When indexing the array, `x` indexes row and `y` indexes column, the way I typically do and the way how matplotlib plot the 2d image. 
-- When plotting the tensors, matplotlib would rotate the array counterclockwise by 90 degrees. So the vertical axis is `y` and horizontal axis is `x`, which is also consistent with our knowledge in drawing the Cartesian coordinate system. Fortunately, Kirs' code has already done in this way, like the ellipse(x, y). 
+- When plotting the tensors, matplotlib would rotate the array counterclockwise by 90 degrees. So the vertical axis is `y` and horizontal axis is `x`, which is also consistent with our knowledge in drawing the Cartesian coordinate system.
 
 
 ## Algorithm caveat
-- In energy calculation, only use the binary mask provided by Kris, rather than a weighted map, which will change the alpha field applied to the tensor field previously and result in geodesic misgoing.
+- In energy calculation, only use a binary mask, rather than a weighted map, which will change the alpha field applied to the tensor field previously and result in geodesic misgoing.
 - Both metric matching and mean calculating should be implemented on the inverse of the original DTI tensor field, since the geodesics are running on the inverse of the tensor field.
 - When accumulating the diffeomorphisms, always remember the order of accumulation of phi and its inverse is different.
 ```
