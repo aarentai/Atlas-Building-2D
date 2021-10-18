@@ -1,0 +1,9 @@
+### Linux ###
+*~
+
+__pycache__/
+.ipynb_checkpoints/
+.vscode/
+Output/
+OtherIPYNB/
+*.log
